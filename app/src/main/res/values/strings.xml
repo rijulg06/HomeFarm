@@ -8,6 +8,7 @@
     <string name="registerText">New to HomeFarm? Click here to register.</string>
     <string name="registerButton">Register</string>
     <string name="registerEmail">Registration Email</string>
+    <string name="registerPassword">Registration Password</string>
     <string name="home">Home</string>
     <string name="account">Account</string>
     <string name="inbox">Inbox</string>

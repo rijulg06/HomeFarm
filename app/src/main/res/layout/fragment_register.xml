@@ -8,14 +8,15 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/registerEmail"
-        android:layout_width="308dp"
-        android:layout_height="51dp"
+        android:layout_width="312dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="12dp"
         android:hint="@string/registerEmail"
         app:boxStrokeColor="@color/light_green"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:counterTextColor="@color/light_green"
         app:startIconDrawable="@drawable/mail">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -25,5 +26,29 @@
             android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/registerPassword"
+        android:layout_width="312dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="12dp"
+        android:hint="@string/registerPassword"
+        app:boxStrokeColor="@color/light_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerEmail"
+        app:startIconDrawable="@drawable/lock"
+        app:endIconMode="password_toggle"
+        app:startIconCheckable="true"
+        android:singleLine="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
