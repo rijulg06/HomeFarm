@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "97306014521",
+    "project_id": "homefarm-7053c",
+    "storage_bucket": "homefarm-7053c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97306014521:android:ed515d0ee4b7e900542ee8",
+        "android_client_info": {
+          "package_name": "com.rijulg.homefarm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97306014521-0qvehro7klc55v3ggpaqg7ge83tvgjlg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxrNffnEFKeg7UAuvXBk3fZtVGGy11_ZI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97306014521-0qvehro7klc55v3ggpaqg7ge83tvgjlg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
