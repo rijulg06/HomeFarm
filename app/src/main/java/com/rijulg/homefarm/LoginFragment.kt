@@ -58,6 +58,24 @@ class LoginFragment : Fragment() {
             view.findNavController().navigate(action)
         }
 
+        binding.emailField.setOnFocusChangeListener { _, _ ->
+            val email = binding.emailField.text.toString()
+            if (binding.emailField.hasFocus()) {
+                binding.emailFieldText.error = null
+            } else if (TextUtils.isEmpty(email)) {
+                binding.emailFieldText.error = "Email cannot be empty"
+            }
+        }
+
+        binding.passwordField.setOnFocusChangeListener { _, _ ->
+            val password = binding.passwordField.text.toString()
+            if (binding.passwordField.hasFocus()) {
+                binding.passwordFieldText.error = null
+            } else if (TextUtils.isEmpty(password)) {
+                binding.passwordFieldText.error = "Password cannot be empty"
+            }
+        }
+
         binding.loginButton.setOnClickListener {
             loginUser()
         }
@@ -68,12 +86,13 @@ class LoginFragment : Fragment() {
         val email = binding.emailField.text.toString()
         val password = binding.passwordField.text.toString()
 
-        if (TextUtils.isEmpty(email)){
-            binding.emailField.error = "Email cannot be empty"
-            binding.emailField.requestFocus()
-        } else if (TextUtils.isEmpty(password)) {
-            binding.passwordField.error = "Password cannot be empty"
-            binding.passwordField.requestFocus()
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+            if (TextUtils.isEmpty(email)) {
+                binding.emailFieldText.error = "Email cannot be empty" }
+            if (TextUtils.isEmpty(password)) {
+                binding.passwordFieldText.error = "Password cannot be empty" }
+            binding.loginButton.requestFocus()
+
         } else {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity()){task: Task<AuthResult> ->
@@ -82,7 +101,7 @@ class LoginFragment : Fragment() {
                         val intent = Intent(requireActivity(), AppActivity::class.java)
                         startActivity(intent)
                     } else {
-                        Toast.makeText(requireActivity(), "Sign in error:" + task.exception?.message, Toast.LENGTH_SHORT).show()
+                        binding.emailFieldText.error = "Sign in error:" + task.exception?.message
                     }
                 }
         }

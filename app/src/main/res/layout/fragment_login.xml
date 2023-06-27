@@ -35,8 +35,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailFieldText"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="312dp"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="@string/email"
         app:boxStrokeColor="@color/light_green"
@@ -44,21 +45,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signInLocation"
         app:counterTextColor="@color/light_green"
-        app:startIconDrawable="@drawable/mail">
+        app:startIconDrawable="@drawable/mail"
+        app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:minHeight="48dp"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordFieldText"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="312dp"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="@string/password"
         app:boxStrokeColor="@color/light_green"
@@ -68,14 +73,16 @@
         app:startIconDrawable="@drawable/lock"
         app:endIconMode="password_toggle"
         app:startIconCheckable="true"
-        android:singleLine="true">
+        android:singleLine="true"
+        app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:minHeight="48dp"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,7 +109,9 @@
         android:text="@string/signInButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordFieldText" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordFieldText"
+        android:focusableInTouchMode="true"
+        android:focusable="true"/>
 
     <TextView
         android:id="@+id/registerText"

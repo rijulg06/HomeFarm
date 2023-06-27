@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">HomeFarm</string>
     <string name="description">A simple, yet effective, way to repurpose excess homegrown fruits and veggies.</string>
-    <string name="email">Email or username</string>
+    <string name="email">Email</string>
     <string name="signInLocation">Log in here:</string>
     <string name="password">Password</string>
     <string name="signInButton">Sign in</string>
