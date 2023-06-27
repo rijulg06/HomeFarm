@@ -8,8 +8,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/registerEmailText"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="312dp"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="275dp"
         android:hint="@string/registerEmail"
         app:boxStrokeColor="@color/light_green"
@@ -17,21 +18,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:counterTextColor="@color/light_green"
-        app:startIconDrawable="@drawable/mail">
+        app:startIconDrawable="@drawable/mail"
+        app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/registerEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans"
-            android:singleLine="true" />
+            android:minHeight="48dp"
+            android:singleLine="true"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/registerPasswordText"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="312dp"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="275dp"
         android:hint="@string/registerPassword"
         android:singleLine="true"
@@ -42,14 +47,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/registerEmailText"
         app:startIconCheckable="true"
-        app:startIconDrawable="@drawable/lock">
+        app:startIconDrawable="@drawable/lock"
+        app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/registerPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,7 +70,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerPasswordText" />
+        app:layout_constraintTop_toBottomOf="@+id/registerPasswordText"
+        tools:ignore="TextContrastCheck"
+        android:focusable="true"
+        android:focusableInTouchMode="true"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
