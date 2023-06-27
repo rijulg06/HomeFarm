@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/appName" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailField"
+        android:id="@+id/emailFieldText"
         android:layout_width="312dp"
         android:layout_height="55dp"
         android:layout_marginTop="12dp"
@@ -47,6 +47,7 @@
         app:startIconDrawable="@drawable/mail">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans"
@@ -55,7 +56,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordField"
+        android:id="@+id/passwordFieldText"
         android:layout_width="312dp"
         android:layout_height="55dp"
         android:layout_marginTop="12dp"
@@ -63,13 +64,14 @@
         app:boxStrokeColor="@color/light_green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailField"
+        app:layout_constraintTop_toBottomOf="@+id/emailFieldText"
         app:startIconDrawable="@drawable/lock"
         app:endIconMode="password_toggle"
         app:startIconCheckable="true"
         android:singleLine="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans"
@@ -100,7 +102,7 @@
         android:text="@string/signInButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordField" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordFieldText" />
 
     <TextView
         android:id="@+id/registerText"
