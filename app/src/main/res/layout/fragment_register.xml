@@ -38,7 +38,7 @@
         android:layout_width="312dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="275dp"
-        android:hint="@string/registerPassword"
+        android:hint="@string/password"
         android:singleLine="true"
         app:boxStrokeColor="@color/light_green"
         app:endIconMode="password_toggle"
