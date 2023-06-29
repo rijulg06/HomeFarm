@@ -3,6 +3,7 @@ package com.rijulg.homefarm
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.createViewModelLazy
 import androidx.navigation.findNavController
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -80,6 +82,8 @@ class RegisterFragment : Fragment() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity()) { task: Task<AuthResult> ->
                     if (task.isSuccessful) {
+                        val currentUser = auth.currentUser
+                        currentUser?.sendEmailVerification()
                         Toast.makeText(requireActivity(), "User registered successfully", Toast.LENGTH_SHORT).show()
                         val intent = Intent(requireActivity(), AppActivity::class.java)
                         startActivity(intent)

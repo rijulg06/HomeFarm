@@ -15,4 +15,7 @@
     <string name="post">Post</string>
     <string name="register">Register</string>
     <string name="logout">Logout</string>
+    <string name="verifyText">Please verify your email.</string>
+    <string name="resendEmail">Resend email</string>
+    <string name="checkVerificationStatus">Check verification status</string>
 </resources>

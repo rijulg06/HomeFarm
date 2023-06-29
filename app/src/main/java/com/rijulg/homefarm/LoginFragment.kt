@@ -21,7 +21,6 @@ class LoginFragment : Fragment() {
 
  //   lateinit var binding: FragmentLoginBinding
 
-    private lateinit var email: String
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
