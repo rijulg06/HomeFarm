@@ -13,17 +13,23 @@ import com.rijulg.homefarm.databinding.ActivityAppBinding
 
 class AppActivity : AppCompatActivity() {
 
+    // View binding variable
     private lateinit var binding : ActivityAppBinding
 
+    // Firebase auth variable
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // View binding implemented
         binding = ActivityAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Opens HomeFragment from start
         replaceFragment(HomeFragment())
 
+        // Bottom nav bar button implementation
         binding.bottomNavigation.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.home -> replaceFragment(HomeFragment())
@@ -37,12 +43,15 @@ class AppActivity : AppCompatActivity() {
             true
         }
 
+        // Firebase auth variable initialized
         auth = Firebase.auth
 
     }
 
     override fun onStart() {
         super.onStart()
+
+        // Email verification check
         val currentUser = auth.currentUser
         if (currentUser != null) {
             if (!currentUser.isEmailVerified){

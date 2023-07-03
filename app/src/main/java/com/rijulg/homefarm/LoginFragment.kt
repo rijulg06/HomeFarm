@@ -119,7 +119,7 @@ class LoginFragment : Fragment() {
                         val intent = Intent(requireActivity(), AppActivity::class.java)
                         startActivity(intent)
                     } else {
-                        binding.emailFieldText.error = "Sign in error:" + task.exception?.message
+                        binding.emailFieldText.error = "Sign in error: " + task.exception?.message
                     }
                 }
         }

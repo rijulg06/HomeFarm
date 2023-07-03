@@ -23,13 +23,18 @@ import com.rijulg.homefarm.databinding.FragmentRegisterBinding
 import org.w3c.dom.Text
 
 class RegisterFragment : Fragment() {
+
+    //View binding variables
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
+    // Firebase auth variable
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Firebase auth variable initialization
         auth = Firebase.auth
     }
 
@@ -43,6 +48,8 @@ class RegisterFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        // View binding implementation
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -50,6 +57,7 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Checks email or password empty
         binding.registerEmail.setOnFocusChangeListener { _, _ ->
             val email = binding.registerEmail.text.toString()
             if (binding.registerEmail.hasFocus()) {
@@ -58,7 +66,6 @@ class RegisterFragment : Fragment() {
                 binding.registerEmailText.error = "Email cannot be empty"
             }
         }
-
         binding.registerPassword.setOnFocusChangeListener { _, _ ->
             val password = binding.registerPassword.text.toString()
             if (binding.registerPassword.hasFocus()) {
@@ -68,6 +75,7 @@ class RegisterFragment : Fragment() {
             }
         }
 
+        // Register button
         binding.doneRegister.setOnClickListener {
             binding.progressCheck.isVisible = true
             createUser()
@@ -79,6 +87,7 @@ class RegisterFragment : Fragment() {
         val email = binding.registerEmail.text.toString()
         val password = binding.registerPassword.text.toString()
 
+        // Checks if email or password is empty
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
             binding.progressCheck.isVisible = false
             if (TextUtils.isEmpty(email)) {
@@ -87,6 +96,8 @@ class RegisterFragment : Fragment() {
                 binding.registerPasswordText.error = "Password cannot be empty" }
             binding.registerHere.requestFocus()
         } else {
+
+            // Register cases
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity()) { task: Task<AuthResult> ->
                     binding.progressCheck.isVisible = false
