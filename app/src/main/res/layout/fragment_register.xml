@@ -6,6 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".RegisterFragment">
 
+    <TextView
+        android:id="@+id/registerHere"
+        android:layout_width="272dp"
+        android:layout_height="99dp"
+        android:layout_marginBottom="500dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:fontFamily="@font/oswald_medium"
+        android:gravity="center_horizontal|top"
+        android:text="@string/description"
+        android:textColor="#151414"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/registerEmailText"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -61,6 +78,16 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progressCheck"
+        android:layout_width="335dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/registerPasswordText"
+        app:layout_constraintBottom_toTopOf="@id/doneRegister" />
+
     <Button
         android:id="@+id/doneRegister"
         android:layout_width="wrap_content"
@@ -71,9 +98,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerPasswordText"
-        tools:ignore="TextContrastCheck"
-        android:focusable="true"
-        android:focusableInTouchMode="true"/>
+        tools:ignore="TextContrastCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

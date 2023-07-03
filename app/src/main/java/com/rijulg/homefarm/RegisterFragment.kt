@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.createViewModelLazy
@@ -30,6 +31,11 @@ class RegisterFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         auth = Firebase.auth
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.progressCheck.isVisible = false
     }
 
     override fun onCreateView(
@@ -63,6 +69,7 @@ class RegisterFragment : Fragment() {
         }
 
         binding.doneRegister.setOnClickListener {
+            binding.progressCheck.isVisible = true
             createUser()
         }
 
@@ -73,14 +80,16 @@ class RegisterFragment : Fragment() {
         val password = binding.registerPassword.text.toString()
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+            binding.progressCheck.isVisible = false
             if (TextUtils.isEmpty(email)) {
             binding.registerEmailText.error = "Email cannot be empty" }
             if (TextUtils.isEmpty(password)) {
                 binding.registerPasswordText.error = "Password cannot be empty" }
-            binding.doneRegister.requestFocus()
+            binding.registerHere.requestFocus()
         } else {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity()) { task: Task<AuthResult> ->
+                    binding.progressCheck.isVisible = false
                     if (task.isSuccessful) {
                         val currentUser = auth.currentUser
                         currentUser?.sendEmailVerification()

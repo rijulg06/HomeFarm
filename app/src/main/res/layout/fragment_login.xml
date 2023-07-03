@@ -31,7 +31,22 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appName" />
+        app:layout_constraintTop_toBottomOf="@+id/appName"
+        android:focusable="true"
+        android:focusableInTouchMode="true"/>
+
+    <TextView
+        android:id="@+id/signInLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/noto_sans"
+        android:text="@string/signInLocation"
+        android:textColor="#151414"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailFieldText"
@@ -54,8 +69,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans"
             android:singleLine="true"
-            android:minHeight="48dp"
-            />
+            android:minHeight="48dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,19 +100,16 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <TextView
-        android:id="@+id/signInLocation"
-        android:layout_width="wrap_content"
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:layout_width="335dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/noto_sans"
-        android:text="@string/signInLocation"
-        android:textColor="#151414"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordFieldText"
+        app:layout_constraintBottom_toTopOf="@+id/loginButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:paddingBottom="10dp"
+        android:indeterminate="true"
+        android:id="@+id/progressCheck" />
 
     <Button
         android:id="@+id/loginButton"
@@ -110,7 +121,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordFieldText"
-        android:focusableInTouchMode="true"
         android:focusable="true"/>
 
     <TextView

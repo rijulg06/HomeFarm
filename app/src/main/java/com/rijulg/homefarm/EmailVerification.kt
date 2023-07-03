@@ -45,8 +45,8 @@ class EmailVerification : Fragment() {
         }
 
         binding.checkVerificationStatus.setOnClickListener {
+            Thread.sleep(1500L)
             currentUser?.reload()
-            binding.verifyText.text = currentUser?.isEmailVerified.toString()
             val intent = Intent(requireActivity(), AppActivity::class.java)
             startActivity(intent)
         }
