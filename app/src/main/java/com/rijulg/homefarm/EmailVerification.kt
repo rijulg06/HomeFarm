@@ -46,25 +46,31 @@ class EmailVerification : Fragment() {
         // Resend email verification button
         val currentUser = auth.currentUser
         binding.resendEmail.setOnClickListener {
+            binding.resendEmail.isEnabled = false
             currentUser?.sendEmailVerification()?.addOnSuccessListener {
                 Toast.makeText(requireActivity(), "Email resent", Toast.LENGTH_SHORT).show()
             }
+            binding.resendEmail.isEnabled = true
         }
 
         // Check verification status button
         binding.checkVerificationStatus.setOnClickListener {
             // TODO: add progress check indicator here
+            binding.checkVerificationStatus.isEnabled = false
             Thread.sleep(1500L)
             currentUser?.reload()
             val intent = Intent(requireActivity(), AppActivity::class.java)
             startActivity(intent)
+            binding.checkVerificationStatus.isEnabled = true
         }
 
         // Logout button
         binding.logout.setOnClickListener {
+            binding.logout.isEnabled = false
             auth.signOut()
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             startActivity(intent)
+            binding.logout.isEnabled = true
         }
 
     }

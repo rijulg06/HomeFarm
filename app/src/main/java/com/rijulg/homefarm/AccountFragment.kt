@@ -46,9 +46,11 @@ class AccountFragment : Fragment() {
 
         // Sign out button functionality
         binding.logout.setOnClickListener {
+            binding.logout.isEnabled = false
             auth.signOut()
             val intent = Intent(activity, LoginActivity::class.java)
             startActivity(intent)
+            binding.logout.isEnabled = true
         }
     }
 

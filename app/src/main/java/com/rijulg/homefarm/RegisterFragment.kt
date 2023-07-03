@@ -62,6 +62,7 @@ class RegisterFragment : Fragment() {
             val email = binding.registerEmail.text.toString()
             if (binding.registerEmail.hasFocus()) {
                 binding.registerEmailText.error = null
+                binding.doneRegister.isEnabled = true
             } else if (TextUtils.isEmpty(email)) {
                 binding.registerEmailText.error = "Email cannot be empty"
             }
@@ -70,6 +71,7 @@ class RegisterFragment : Fragment() {
             val password = binding.registerPassword.text.toString()
             if (binding.registerPassword.hasFocus()) {
                 binding.registerPasswordText.error = null
+                binding.doneRegister.isEnabled = true
             } else if (TextUtils.isEmpty(password)) {
                 binding.registerPasswordText.error = "Password cannot be empty"
             }
@@ -84,6 +86,9 @@ class RegisterFragment : Fragment() {
     }
 
     private fun createUser() {
+
+        binding.doneRegister.isEnabled = false
+
         val email = binding.registerEmail.text.toString()
         val password = binding.registerPassword.text.toString()
 
@@ -100,6 +105,7 @@ class RegisterFragment : Fragment() {
             // Register cases
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity()) { task: Task<AuthResult> ->
+                    binding.doneRegister.isEnabled = true
                     binding.progressCheck.isVisible = false
                     if (task.isSuccessful) {
                         val currentUser = auth.currentUser

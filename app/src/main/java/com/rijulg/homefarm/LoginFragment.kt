@@ -67,8 +67,10 @@ class LoginFragment : Fragment() {
 
         // Nav to register frag
         binding.registerButton.setOnClickListener {
+            binding.registerButton.isEnabled = false
             val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
             view.findNavController().navigate(action)
+            binding.registerButton.isEnabled = true
         }
 
         // Checks if email or password field is empty
@@ -76,6 +78,7 @@ class LoginFragment : Fragment() {
             val email = binding.emailField.text.toString()
             if (binding.emailField.hasFocus()) {
                 binding.emailFieldText.error = null
+                binding.loginButton.isEnabled = true
             } else if (TextUtils.isEmpty(email)) {
                 binding.emailFieldText.error = "Email cannot be empty"
             }
@@ -84,6 +87,7 @@ class LoginFragment : Fragment() {
             val password = binding.passwordField.text.toString()
             if (binding.passwordField.hasFocus()) {
                 binding.passwordFieldText.error = null
+                binding.loginButton.isEnabled = true
             } else if (TextUtils.isEmpty(password)) {
                 binding.passwordFieldText.error = "Password cannot be empty"
             }
@@ -97,6 +101,9 @@ class LoginFragment : Fragment() {
     }
 
     private fun loginUser() {
+
+        binding.loginButton.isEnabled = false
+
         val email = binding.emailField.text.toString()
         val password = binding.passwordField.text.toString()
 
@@ -113,6 +120,7 @@ class LoginFragment : Fragment() {
             // Sign in cases
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity()){task: Task<AuthResult> ->
+                    binding.loginButton.isEnabled = true
                     binding.progressCheck.isVisible = false
                     if (task.isSuccessful) {
                         Toast.makeText(requireActivity(), "User signed in successfully", Toast.LENGTH_SHORT).show()
