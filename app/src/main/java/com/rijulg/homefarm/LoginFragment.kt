@@ -1,17 +1,13 @@
 package com.rijulg.homefarm
 
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.android.gms.tasks.Task
@@ -41,7 +37,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         // View binding
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
@@ -54,8 +50,14 @@ class LoginFragment : Fragment() {
         // Check if user is already signed in
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            val intent = Intent(activity, AppActivity::class.java)
-            startActivity(intent)
+            if (currentUser.isEmailVerified) {
+                val intent = Intent(activity, AppActivity::class.java)
+                startActivity(intent)
+            } else {
+                currentUser.sendEmailVerification()
+                replaceFragment()
+                Toast.makeText(requireActivity(), "Email has not been verified", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.progressCheck.isVisible = false
@@ -120,12 +122,21 @@ class LoginFragment : Fragment() {
             // Sign in cases
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity()){task: Task<AuthResult> ->
+                    val currentUser = auth.currentUser
                     binding.loginButton.isEnabled = true
                     binding.progressCheck.isVisible = false
                     if (task.isSuccessful) {
                         Toast.makeText(requireActivity(), "User signed in successfully", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(requireActivity(), AppActivity::class.java)
-                        startActivity(intent)
+                        if (currentUser != null) {
+                            if (currentUser.isEmailVerified) {
+                                val intent = Intent(activity, AppActivity::class.java)
+                                startActivity(intent)
+                            } else {
+                                currentUser.sendEmailVerification()
+                                replaceFragment()
+                                Toast.makeText(requireActivity(), "Email has not been verified", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     } else {
                         binding.emailFieldText.error = "Sign in error: " + task.exception?.message
                     }
@@ -137,5 +148,15 @@ class LoginFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun replaceFragment() {
+
+        fragmentManager
+            ?.beginTransaction()
+            ?.replace(R.id.nav_host_fragment, EmailVerification())
+            ?.commit()
+
+    }
+
 }
 

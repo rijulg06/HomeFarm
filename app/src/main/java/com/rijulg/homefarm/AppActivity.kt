@@ -17,7 +17,7 @@ class AppActivity : AppCompatActivity() {
     private lateinit var binding : ActivityAppBinding
 
     // Firebase auth variable
-    private lateinit var auth: FirebaseAuth
+//    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,23 +44,23 @@ class AppActivity : AppCompatActivity() {
         }
 
         // Firebase auth variable initialized
-        auth = Firebase.auth
+//        auth = Firebase.auth
 
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        // Email verification check
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            if (!currentUser.isEmailVerified){
-                replaceFragment(EmailVerification())
-                binding.bottomNavigation.visibility = View.GONE
-                Toast.makeText(this, "Email has not been verified", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//
+//        // Email verification check
+//        val currentUser = auth.currentUser
+//        if (currentUser != null) {
+//            if (!currentUser.isEmailVerified){
+//                replaceFragment(EmailVerification())
+//                binding.bottomNavigation.visibility = View.GONE
+//                Toast.makeText(this, "Email has not been verified", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//    }
 
     private fun replaceFragment(fragment: Fragment) {
 

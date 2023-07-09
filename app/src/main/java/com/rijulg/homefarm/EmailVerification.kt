@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -42,25 +43,32 @@ class EmailVerification : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val currentUser = auth.currentUser
 
         // Resend email verification button
-        val currentUser = auth.currentUser
         binding.resendEmail.setOnClickListener {
             binding.resendEmail.isEnabled = false
             currentUser?.sendEmailVerification()?.addOnSuccessListener {
                 Toast.makeText(requireActivity(), "Email resent", Toast.LENGTH_SHORT).show()
             }
+                ?.addOnFailureListener {
+                    Toast.makeText(requireActivity(), "Please check your email for a verification link.", Toast.LENGTH_LONG).show()
+                }
             binding.resendEmail.isEnabled = true
         }
 
         // Check verification status button
         binding.checkVerificationStatus.setOnClickListener {
-            // TODO: add progress check indicator here
             binding.checkVerificationStatus.isEnabled = false
-            Thread.sleep(1500L)
             currentUser?.reload()
-            val intent = Intent(requireActivity(), AppActivity::class.java)
-            startActivity(intent)
+            if (currentUser != null) {
+                if (currentUser.isEmailVerified) {
+                    val intent = Intent(activity, AppActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(requireActivity(), "Email has not been verified", Toast.LENGTH_SHORT).show()
+                }
+            }
             binding.checkVerificationStatus.isEnabled = true
         }
 
@@ -73,6 +81,11 @@ class EmailVerification : Fragment() {
             binding.logout.isEnabled = true
         }
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

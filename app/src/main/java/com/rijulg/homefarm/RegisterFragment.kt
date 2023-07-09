@@ -111,8 +111,7 @@ class RegisterFragment : Fragment() {
                         val currentUser = auth.currentUser
                         currentUser?.sendEmailVerification()
                         Toast.makeText(requireActivity(), "User registered successfully", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(requireActivity(), AppActivity::class.java)
-                        startActivity(intent)
+                        fragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment, EmailVerification())?.commit()
                     } else {
                         binding.registerEmailText.error = "Registration error: " + task.exception?.message
                     }
