@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.rijulg.homefarm.databinding.FragmentEmailVerificationBinding
+import kotlinx.coroutines.*
 
 class EmailVerification : Fragment() {
 
@@ -63,16 +64,8 @@ class EmailVerification : Fragment() {
         binding.checkVerificationStatus.setOnClickListener {
             binding.progressCheck.isVisible = true
             binding.checkVerificationStatus.isEnabled = false
-            Thread.sleep(5000L)
-            currentUser?.reload()
-            if (currentUser != null) {
-                if (currentUser.isEmailVerified) {
-                    fragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment, UserNameFragment())?.commit()
-                } else {
-                    Toast.makeText(requireActivity(), "Email has not been verified", Toast.LENGTH_SHORT).show()
-                }
-            }
-            binding.checkVerificationStatus.isEnabled = true
+            Toast.makeText(requireActivity(), "Email is being verified. This may take a few seconds.", Toast.LENGTH_LONG).show()
+            CoroutineScope(Dispatchers.IO).launch { runLogic() }
         }
 
         // Logout button
@@ -83,7 +76,24 @@ class EmailVerification : Fragment() {
             startActivity(intent)
             binding.logout.isEnabled = true
         }
+    }
 
+    private suspend fun runLogic() {
+        val currentUser = auth.currentUser
+        withContext(Dispatchers.Main) {
+            currentUser?.reload()
+            delay(5000L)
+            currentUser?.reload()
+            if (currentUser != null) {
+                if (currentUser.isEmailVerified) {
+                    fragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment, UserNameFragment())?.commit()
+                } else {
+                    Toast.makeText(requireActivity(), "Email has not been verified", Toast.LENGTH_SHORT).show()
+                }
+            }
+            binding.progressCheck.isVisible = false
+            binding.checkVerificationStatus.isEnabled = true
+        }
     }
 
     override fun onDestroyView() {
