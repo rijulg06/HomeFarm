@@ -54,7 +54,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="312dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="275dp"
+        android:layout_marginBottom="150dp"
         android:hint="@string/password"
         android:singleLine="true"
         app:boxStrokeColor="@color/light_green"

@@ -2,12 +2,10 @@ package com.rijulg.homefarm
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -63,8 +61,7 @@ class EmailVerification : Fragment() {
             currentUser?.reload()
             if (currentUser != null) {
                 if (currentUser.isEmailVerified) {
-                    val intent = Intent(activity, AppActivity::class.java)
-                    startActivity(intent)
+                    fragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment, UserNameFragment())?.commit()
                 } else {
                     Toast.makeText(requireActivity(), "Email has not been verified", Toast.LENGTH_SHORT).show()
                 }

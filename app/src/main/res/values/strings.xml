@@ -18,4 +18,9 @@
     <string name="verifyText">Please verify your email.</string>
     <string name="resendEmail">Resend email</string>
     <string name="checkVerificationStatus">Check verification status</string>
+    <string name="registerName">Name</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="finishAccount">Finish setting up your account. Enter your first name and last initial.</string>
+    <string name="next">Next</string>
 </resources>
