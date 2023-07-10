@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         // View binding initialized
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
