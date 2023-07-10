@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.rijulg.homefarm.databinding.FragmentEmailVerificationBinding
 import com.rijulg.homefarm.databinding.FragmentHomeBinding
 import com.rijulg.homefarm.models.Post
+import com.rijulg.homefarm.recyclerView.PostsAdapter
 
 private const val TAG = "PostsActivity"
 
@@ -56,17 +56,15 @@ class HomeFragment : Fragment() {
             .orderBy("creation_time_ms", Query.Direction.DESCENDING)
         postsReference.addSnapshotListener { snapshot, exception ->
             if (exception != null || snapshot == null) {
-                Log.e(TAG, "Exception when querying posts", exception)
                 return@addSnapshotListener
             }
             val postList = snapshot.toObjects(Post::class.java)
             recyclerView = view.findViewById(R.id.recycler_view)!!
+            val recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
             recyclerView.layoutManager = LinearLayoutManager(context)
             recyclerView.setHasFixedSize(true)
             recyclerView.adapter = PostsAdapter(requireActivity(), postList)
-            for (post in postList) {
-                Log.i(TAG, "Post $post")
-            }
+            (recyclerView.layoutManager as LinearLayoutManager).onRestoreInstanceState(recyclerViewState)
         }
     }
 

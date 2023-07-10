@@ -2,10 +2,12 @@ package com.rijulg.homefarm
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -43,6 +45,8 @@ class EmailVerification : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val currentUser = auth.currentUser
 
+        binding.progressCheck.isVisible = false
+
         // Resend email verification button
         binding.resendEmail.setOnClickListener {
             binding.resendEmail.isEnabled = false
@@ -57,7 +61,9 @@ class EmailVerification : Fragment() {
 
         // Check verification status button
         binding.checkVerificationStatus.setOnClickListener {
+            binding.progressCheck.isVisible = true
             binding.checkVerificationStatus.isEnabled = false
+            Thread.sleep(5000L)
             currentUser?.reload()
             if (currentUser != null) {
                 if (currentUser.isEmailVerified) {
