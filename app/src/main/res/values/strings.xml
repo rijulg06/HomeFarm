@@ -24,4 +24,7 @@
     <string name="finishAccount">Finish setting up your account. Enter your first name and last initial.</string>
     <string name="next">Next</string>
     <string name="fruit">Fruit</string>
+    <string name="descriptionInput">Post description</string>
+    <string name="postFruit">Post fruit</string>
+    <string name="chooseImage">Choose Image</string>
 </resources>
