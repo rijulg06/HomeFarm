@@ -1,14 +1,8 @@
 package com.rijulg.homefarm
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.rijulg.homefarm.databinding.ActivityAppBinding
 
 class AppActivity : AppCompatActivity() {
@@ -43,24 +37,7 @@ class AppActivity : AppCompatActivity() {
             true
         }
 
-        // Firebase auth variable initialized
-//        auth = Firebase.auth
-
     }
-
-//    override fun onStart() {
-//        super.onStart()
-//
-//        // Email verification check
-//        val currentUser = auth.currentUser
-//        if (currentUser != null) {
-//            if (!currentUser.isEmailVerified){
-//                replaceFragment(EmailVerification())
-//                binding.bottomNavigation.visibility = View.GONE
-//                Toast.makeText(this, "Email has not been verified", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
 
     private fun replaceFragment(fragment: Fragment) {
 

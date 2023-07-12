@@ -151,10 +151,10 @@ class LoginFragment : Fragment() {
 
     private fun replaceFragment() {
 
-        fragmentManager
-            ?.beginTransaction()
-            ?.replace(R.id.nav_host_fragment, EmailVerification())
-            ?.commit()
+        parentFragmentManager
+            .beginTransaction()
+            .replace(R.id.nav_host_fragment, EmailVerification())
+            .commit()
 
     }
 

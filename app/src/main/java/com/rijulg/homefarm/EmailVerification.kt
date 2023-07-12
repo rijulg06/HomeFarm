@@ -86,7 +86,7 @@ class EmailVerification : Fragment() {
             currentUser?.reload()
             if (currentUser != null) {
                 if (currentUser.isEmailVerified) {
-                    fragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment, UserNameFragment())?.commit()
+                    parentFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, UserNameFragment()).commit()
                 } else {
                     Toast.makeText(requireActivity(), "Email has not been verified", Toast.LENGTH_SHORT).show()
                 }

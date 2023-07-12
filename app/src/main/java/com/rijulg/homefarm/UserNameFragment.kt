@@ -67,7 +67,7 @@ class UserNameFragment : Fragment() {
                 binding.progressCheck.progress = 100
                 val user = User(name = name)
                 auth.currentUser?.let { it1 -> firestoreDb.collection("users").document(it1.uid).set(user) }
-                fragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment, UserLocationFragment())?.commit()
+                parentFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, UserLocationFragment()).commit()
             }
         }
 

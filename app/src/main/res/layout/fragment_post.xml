@@ -21,7 +21,9 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:scaleType="centerCrop"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@tools:sample/avatars"
+        android:focusableInTouchMode="true"
+        android:focusable="true"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/descriptionInputText"
@@ -69,6 +71,6 @@
         android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/postFruit" />
+        android:text="@string/post" />
 
 </LinearLayout>

@@ -1,7 +1,6 @@
 package com.rijulg.homefarm
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +12,6 @@ import com.google.firebase.firestore.Query
 import com.rijulg.homefarm.databinding.FragmentHomeBinding
 import com.rijulg.homefarm.models.Post
 import com.rijulg.homefarm.recyclerView.PostsAdapter
-
-private const val TAG = "PostsActivity"
 
 class HomeFragment : Fragment() {
 
@@ -61,9 +58,9 @@ class HomeFragment : Fragment() {
             val postList = snapshot.toObjects(Post::class.java)
             recyclerView = view.findViewById(R.id.recycler_view)!!
             val recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
-            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.layoutManager = LinearLayoutManager(activity)
             recyclerView.setHasFixedSize(true)
-            recyclerView.adapter = PostsAdapter(requireActivity(), postList)
+            recyclerView.adapter = activity?.let { PostsAdapter(it, postList) }
             (recyclerView.layoutManager as LinearLayoutManager).onRestoreInstanceState(recyclerViewState)
         }
     }
