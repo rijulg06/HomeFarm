@@ -2,10 +2,11 @@
     <string name="app_name">HomeFarm</string>
     <string name="description">A simple, yet effective, way to repurpose excess homegrown fruits and veggies.</string>
     <string name="email">Email</string>
-    <string name="signInLocation">Log in here:</string>
+    <string name="signInLocation">Login</string>
     <string name="password">Password</string>
     <string name="signInButton">Sign in</string>
-    <string name="registerText">New to HomeFarm? Click here to register.</string>
+    <string name="registerText1">New to HomeFarm? </string>
+    <string name="registerText2"><u>Click here to register.</u></string>
     <string name="registerButton">Register</string>
     <string name="registerEmail">Registration Email</string>
     <string name="registerPassword">Registration Password</string>
@@ -15,16 +16,18 @@
     <string name="post">Post</string>
     <string name="register">Register</string>
     <string name="logout">Logout</string>
-    <string name="verifyText">Please verify your email.</string>
-    <string name="resendEmail">Resend email</string>
+    <string name="verifyText">We\'ve sent a verification link to \n <b>%1$s</b> </string>
+    <string name="checkEmail">Check your email</string>
+    <string name="resendEmail1">Didn\'t receive an email?</string>
+    <string name="resendEmail2"><u>Click here to resend.</u></string>
     <string name="checkVerificationStatus">Check verification status</string>
     <string name="registerName">Name</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="finishAccount">Finish setting up your account. Enter your first name and last initial.</string>
     <string name="next">Next</string>
     <string name="fruit">Fruit</string>
     <string name="descriptionInput">Post description</string>
     <string name="postFruit">Post fruit</string>
     <string name="chooseImage">Choose Image</string>
+    <string name="signInHere"><u>Sign in here.</u></string>
+    <string name="backLogin">Back to login page</string>
 </resources>

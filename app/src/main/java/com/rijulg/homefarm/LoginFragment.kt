@@ -68,11 +68,11 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Nav to register frag
-        binding.registerButton.setOnClickListener {
-            binding.registerButton.isEnabled = false
+        binding.registerClick.setOnClickListener {
+            binding.registerClick.isEnabled = false
             val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
             view.findNavController().navigate(action)
-            binding.registerButton.isEnabled = true
+            binding.registerClick.isEnabled = true
         }
 
         // Checks if email or password field is empty

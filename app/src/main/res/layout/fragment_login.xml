@@ -39,12 +39,12 @@
         android:id="@+id/signInLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="24dp"
-        android:fontFamily="@font/noto_sans"
+        android:fontFamily="@font/noto_sans_bold"
         android:text="@string/signInLocation"
-        android:textColor="#151414"
+        android:textColor="@color/light_green"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
@@ -123,39 +123,41 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordFieldText"
         android:focusable="true"/>
 
-    <TextView
-        android:id="@+id/registerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/noto_sans"
-        android:text="@string/registerText"
-        android:textColor="#151414"
-        app:layout_constraintBottom_toTopOf="@+id/registerButton"
-        app:layout_constraintStart_toEndOf="@+id/imageView" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/registerButton"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/sprout"
         android:contentDescription="Sprout"/>
 
-    <Button
-        android:id="@+id/registerButton"
-        android:layout_width="167dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="55dp"
+    <TextView
+        android:id="@+id/registerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="40dp"
         android:fontFamily="@font/noto_sans"
-        android:text="@string/registerButton"
+        android:text="@string/registerText1"
+        android:textColor="#151414"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/registerClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="0dp"
+        android:fontFamily="@font/noto_sans"
+        android:text="@string/registerText2"
+        android:textColor="@color/light_green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/registerText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

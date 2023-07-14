@@ -77,6 +77,13 @@ class RegisterFragment : Fragment() {
             }
         }
 
+        binding.signInClick.setOnClickListener {
+            binding.signInClick.isEnabled = false
+            val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
+            view.findNavController().navigate(action)
+            binding.signInClick.isEnabled = true
+        }
+
         // Register button
         binding.doneRegister.setOnClickListener {
             binding.progressCheck.isVisible = true

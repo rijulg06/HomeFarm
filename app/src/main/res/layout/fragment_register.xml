@@ -7,36 +7,47 @@
     tools:context=".RegisterFragment">
 
     <TextView
-        android:id="@+id/registerHere"
-        android:layout_width="272dp"
-        android:layout_height="99dp"
-        android:layout_marginBottom="500dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:fontFamily="@font/oswald_medium"
-        android:gravity="center_horizontal|top"
-        android:text="@string/description"
-        android:textColor="#151414"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/appName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/alfa_slab_one"
+        android:text="@string/app_name"
+        android:textColor="@color/light_green"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/registerHere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="32dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="@string/registerButton"
+        android:textColor="@color/light_green"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appName" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/registerEmailText"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="312dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="275dp"
-        android:hint="@string/registerEmail"
+        android:hint="@string/email"
         app:boxStrokeColor="@color/light_green"
+        app:counterTextColor="@color/light_green"
+        app:errorEnabled="true"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:counterTextColor="@color/light_green"
-        app:startIconDrawable="@drawable/mail"
-        app:errorEnabled="true">
+        app:layout_constraintTop_toBottomOf="@+id/registerHere"
+        app:startIconDrawable="@drawable/mail">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/registerEmail"
@@ -55,11 +66,11 @@
         android:layout_width="312dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="150dp"
+        android:layout_marginTop="12dp"
         android:hint="@string/password"
         android:singleLine="true"
         app:boxStrokeColor="@color/light_green"
         app:endIconMode="password_toggle"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/registerEmailText"
@@ -86,19 +97,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/registerPasswordText"
-        app:layout_constraintBottom_toTopOf="@id/doneRegister" />
+        app:layout_constraintBottom_toTopOf="@id/doneRegister"
+        android:paddingBottom="10dp"/>
 
     <Button
         android:id="@+id/doneRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="225dp"
+        android:fontFamily="@font/noto_sans"
         android:text="@string/register"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerPasswordText"
         tools:ignore="TextContrastCheck" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/sprout"
+        android:contentDescription="Sprout"/>
+
+    <TextView
+        android:id="@+id/signInText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="40dp"
+        android:fontFamily="@font/noto_sans"
+        android:text="Already have an account?"
+        android:textColor="#151414"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/signInClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="0dp"
+        android:fontFamily="@font/noto_sans"
+        android:text="@string/signInHere"
+        android:textColor="@color/light_green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/signInText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

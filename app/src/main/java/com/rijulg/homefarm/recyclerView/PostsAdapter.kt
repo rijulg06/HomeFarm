@@ -25,12 +25,6 @@ class PostsAdapter (val context: Context, val posts: List<Post>) :
 
         holder.bind(posts[position])
 
-//        val currentItem = posts[position]
-//        holder.tvName.text = currentItem.user?.name
-//        holder.tvDescription.text = currentItem.description
-//        Glide.with(context).load(currentItem.imageUrl).into(holder.ivPost)
-//        holder.tvRelativeTime.text = DateUtils.getRelativeTimeSpanString(currentItem.creationTimeMs)
-//        holder.tvFruit.text = currentItem.fruit
     }
 
     override fun getItemCount(): Int {

@@ -49,15 +49,15 @@ class EmailVerification : Fragment() {
         binding.progressCheck.isVisible = false
 
         // Resend email verification button
-        binding.resendEmail.setOnClickListener {
-            binding.resendEmail.isEnabled = false
+        binding.resendEmail2.setOnClickListener {
+            binding.resendEmail2.isEnabled = false
             currentUser?.sendEmailVerification()?.addOnSuccessListener {
                 Toast.makeText(requireActivity(), "Email resent", Toast.LENGTH_SHORT).show()
             }
                 ?.addOnFailureListener {
                     Toast.makeText(requireActivity(), "Please check your email for a verification link.", Toast.LENGTH_LONG).show()
                 }
-            binding.resendEmail.isEnabled = true
+            binding.resendEmail2.isEnabled = true
         }
 
         // Check verification status button
@@ -69,13 +69,18 @@ class EmailVerification : Fragment() {
         }
 
         // Logout button
-        binding.logout.setOnClickListener {
-            binding.logout.isEnabled = false
+        binding.backLogin.setOnClickListener {
+            binding.backLogin.isEnabled = false
             auth.signOut()
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             startActivity(intent)
-            binding.logout.isEnabled = true
+            binding.backLogin.isEnabled = true
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.verifyEmail.text = getString(R.string.verifyText, auth.currentUser?.email)
     }
 
     private suspend fun runLogic() {
