@@ -30,4 +30,5 @@
     <string name="chooseImage">Choose Image</string>
     <string name="signInHere"><u>Sign in here.</u></string>
     <string name="backLogin">Back to login page</string>
+    <string name="chatText">Type a message</string>
 </resources>

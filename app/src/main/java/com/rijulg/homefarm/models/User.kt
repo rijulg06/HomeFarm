@@ -1,3 +1,8 @@
 package com.rijulg.homefarm.models
 
-data class User(var name: String = "")
+import java.io.Serializable
+
+data class User(
+    var uid: String = "",
+    var name: String = ""
+) : Serializable

@@ -61,12 +61,16 @@ class UserNameFragment : Fragment() {
         binding.nextButton.setOnClickListener {
             val name = binding.registerName.text.toString()
             if (TextUtils.isEmpty(name)) {
-                binding.registerNameText.error = "Email cannot be empty"
+                binding.registerNameText.error = "Name cannot be empty"
                 binding.finishAccount.requestFocus()
             } else {
                 binding.progressCheck.progress = 100
-                val user = User(name = name)
-                auth.currentUser?.let { it1 -> firestoreDb.collection("users").document(it1.uid).set(user) }
+                val user = auth.currentUser?.uid?.let { it1 -> User(uid = it1, name = name) }
+                auth.currentUser?.let { it1 ->
+                    if (user != null) {
+                        firestoreDb.collection("users").document(it1.uid).set(user)
+                    }
+                }
                 parentFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, UserLocationFragment()).commit()
             }
         }
