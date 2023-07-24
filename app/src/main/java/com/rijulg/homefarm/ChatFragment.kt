@@ -1,5 +1,6 @@
 package com.rijulg.homefarm
 
+import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,16 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
 import com.rijulg.homefarm.databinding.FragmentChatBinding
 import com.rijulg.homefarm.models.Message
 import com.rijulg.homefarm.models.Room
 import com.rijulg.homefarm.models.User
+import com.rijulg.homefarm.recyclerView.MessageAdapter
+import com.rijulg.homefarm.recyclerView.PostsAdapter
 
 class ChatFragment : Fragment() {
 
@@ -31,6 +37,8 @@ class ChatFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
 
     private lateinit var roomId: String
+
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,7 +92,41 @@ class ChatFragment : Fragment() {
                         roomId = document.id
                     }
                 }
+
+                firestoreDb.collection("rooms")
+                    .document(roomId)
+                    .collection("messages")
+                    .orderBy("sentAt", Query.Direction.DESCENDING)
+                    .addSnapshotListener { snapshot, exception ->
+
+                        if(exception != null || snapshot == null) {
+                            return@addSnapshotListener
+                        }
+
+                        val messageList = snapshot.toObjects(Message::class.java)
+
+                        val manager = LinearLayoutManager(activity)
+                        manager.reverseLayout = true
+                        recyclerView = view.findViewById(R.id.chatRecyclerView)!!
+                        recyclerView.layoutManager = manager
+                        recyclerView.setHasFixedSize(true)
+                        recyclerView.adapter = activity?.let { MessageAdapter(it, messageList) }
+
+                    }
+
             }
+
+//            .addOnCompleteListener { task ->
+//                val documents = task.result
+//                if(documents.isEmpty) {
+//                    roomId = firestoreDb.collection("rooms").document().id
+//                    firestoreDb.collection("rooms").document(roomId).set(roomData)
+//                } else {
+//                    for(document in documents) {
+//                        roomId = document.id
+//                    }
+//                }
+//            }
 
         binding.sendButton.setOnClickListener {
 
