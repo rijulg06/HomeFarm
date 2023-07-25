@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -60,6 +61,12 @@ class PostsAdapter (val context: Context, val posts: List<Post>) :
             chatButton.setOnClickListener { v ->
 
                 val toUser = posts[bindingAdapterPosition].user
+
+                if (toUser?.uid == Firebase.auth.currentUser?.uid) {
+                    Toast.makeText(context, "Cannot chat with yourself", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
                 val bundle = Bundle()
                 bundle.putSerializable("toUser", toUser)
 

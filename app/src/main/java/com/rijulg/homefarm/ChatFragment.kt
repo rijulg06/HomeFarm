@@ -134,6 +134,8 @@ class ChatFragment : Fragment() {
             binding.chatText.text.clear()
             val message = Message(messageText = messageText, fromUid = uid1)
             firestoreDb.collection("rooms").document(roomId).collection("messages").document().set(message)
+            val roomLastMessage = Room(uid1, uid2, message)
+            firestoreDb.collection("rooms").document(roomId).set(roomLastMessage)
 
         }
 
