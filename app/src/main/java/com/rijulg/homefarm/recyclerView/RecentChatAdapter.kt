@@ -3,6 +3,7 @@ package com.rijulg.homefarm.recyclerView
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -45,7 +46,7 @@ class RecentChatAdapter(options: FirestoreRecyclerOptions<Room>) :
             holder.recentMessage.text = room.lastMessage?.messageText
         }
 
-        holder.recentTime.text = room.lastMessage?.sentAt.toString()
+        holder.recentTime.text = room.lastMessage?.let { DateUtils.getRelativeTimeSpanString(it.sentAt) }
 
         holder.itemView.setOnClickListener { v ->
 

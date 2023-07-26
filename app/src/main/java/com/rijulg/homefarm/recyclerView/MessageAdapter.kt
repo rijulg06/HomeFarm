@@ -1,6 +1,7 @@
 package com.rijulg.homefarm.recyclerView
 
 import android.content.Context
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,7 +59,7 @@ class MessageAdapter (val context: Context, private val messages: List<Message>)
                 toMessageTime.isGone = true
 
                 fromMessageText.text = message.messageText
-                fromMessageTime.text = message.sentAt.toString()
+                fromMessageTime.text = DateUtils.getRelativeTimeSpanString(message.sentAt)
 
                 messageFrom.isVisible = true
                 fromMessageText.isVisible = true
@@ -70,7 +71,7 @@ class MessageAdapter (val context: Context, private val messages: List<Message>)
                 fromMessageText.isGone = true
                 fromMessageTime.isGone = true
 
-                toMessageTime.text = message.sentAt.toString()
+                toMessageTime.text = DateUtils.getRelativeTimeSpanString(message.sentAt)
                 toUser.text = message.fromUser?.name
                 toMessageText.text = message.messageText
 

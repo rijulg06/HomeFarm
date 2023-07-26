@@ -6,5 +6,5 @@ import java.util.*
 data class Message(
     var messageText: String = "",
     val fromUser: User? = null,
-    @ServerTimestamp val sentAt: Date? = null
+    var sentAt: Long = 0
 )

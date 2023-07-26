@@ -1,29 +1,23 @@
 package com.rijulg.homefarm
 
-import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.play.integrity.internal.t
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
 import com.rijulg.homefarm.databinding.FragmentChatBinding
 import com.rijulg.homefarm.models.Message
 import com.rijulg.homefarm.models.Room
 import com.rijulg.homefarm.models.User
 import com.rijulg.homefarm.recyclerView.MessageAdapter
-import com.rijulg.homefarm.recyclerView.PostsAdapter
 
 class ChatFragment : Fragment() {
 
@@ -96,7 +90,7 @@ class ChatFragment : Fragment() {
                                 val messageText = binding.chatText.text.toString()
                                 binding.chatText.text.clear()
 
-                                val message = Message(messageText, fromUser)
+                                val message = Message(messageText, fromUser, System.currentTimeMillis())
                                 firestoreDb.collection("rooms").document(roomId).collection("messages").document().set(message)
                                 val roomLastMessage = Room(fromUser, toUser, message)
                                 firestoreDb.collection("rooms").document(roomId).set(roomLastMessage)
@@ -116,7 +110,7 @@ class ChatFragment : Fragment() {
                         val messageText = binding.chatText.text.toString()
                         binding.chatText.text.clear()
 
-                        val message = Message(messageText, fromUser)
+                        val message = Message(messageText, fromUser, System.currentTimeMillis())
                         firestoreDb.collection("rooms").document(roomId)
                             .collection("messages").document().set(message)
                         val roomLastMessage = Room(fromUser, toUser, message)

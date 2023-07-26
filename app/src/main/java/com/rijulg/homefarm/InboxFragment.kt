@@ -1,7 +1,6 @@
 package com.rijulg.homefarm
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,12 +12,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.rijulg.homefarm.databinding.FragmentInboxBinding
 import com.rijulg.homefarm.models.Room
 import com.rijulg.homefarm.recyclerView.RecentChatAdapter
-import org.checkerframework.checker.units.qual.s
 
 class InboxFragment : Fragment() {
 
