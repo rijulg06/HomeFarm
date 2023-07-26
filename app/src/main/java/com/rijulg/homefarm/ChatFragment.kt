@@ -89,12 +89,40 @@ class ChatFragment : Fragment() {
                     .addOnSuccessListener { documents ->
                         if(documents.isEmpty) {
                             roomId = firestoreDb.collection("rooms").document().id
-                            firestoreDb.collection("rooms").document(roomId).set(roomData)
+
+                            binding.sendButton.setOnClickListener {
+
+                                firestoreDb.collection("rooms").document(roomId).set(roomData)
+                                val messageText = binding.chatText.text.toString()
+                                binding.chatText.text.clear()
+
+                                val message = Message(messageText, fromUser)
+                                firestoreDb.collection("rooms").document(roomId).collection("messages").document().set(message)
+                                val roomLastMessage = Room(fromUser, toUser, message)
+                                firestoreDb.collection("rooms").document(roomId).set(roomLastMessage)
+
+                                return@setOnClickListener
+
+                            }
+
                         } else {
                             for(document in documents) {
                                 roomId = document.id
                             }
                         }
+
+                    binding.sendButton.setOnClickListener {
+
+                        val messageText = binding.chatText.text.toString()
+                        binding.chatText.text.clear()
+
+                        val message = Message(messageText, fromUser)
+                        firestoreDb.collection("rooms").document(roomId)
+                            .collection("messages").document().set(message)
+                        val roomLastMessage = Room(fromUser, toUser, message)
+                        firestoreDb.collection("rooms").document(roomId)
+                            .set(roomLastMessage)
+                    }
 
                         firestoreDb.collection("rooms")
                             .document(roomId)
@@ -120,36 +148,6 @@ class ChatFragment : Fragment() {
                     }
 
             }
-
-//            .addOnCompleteListener { task ->
-//                val documents = task.result
-//                if(documents.isEmpty) {
-//                    roomId = firestoreDb.collection("rooms").document().id
-//                    firestoreDb.collection("rooms").document(roomId).set(roomData)
-//                } else {
-//                    for(document in documents) {
-//                        roomId = document.id
-//                    }
-//                }
-//            }
-
-        binding.sendButton.setOnClickListener {
-
-            val messageText = binding.chatText.text.toString()
-            binding.chatText.text.clear()
-
-            firestoreDb.collection("users").document(uid1).get()
-                .addOnSuccessListener { userSnapshot ->
-
-                    val fromUser = userSnapshot.toObject(User::class.java)
-                    val message = Message(messageText, fromUser)
-                    firestoreDb.collection("rooms").document(roomId).collection("messages").document().set(message)
-                    val roomLastMessage = Room(fromUser, toUser, message)
-                    firestoreDb.collection("rooms").document(roomId).set(roomLastMessage)
-
-                }
-
-        }
 
     }
 

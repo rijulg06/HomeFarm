@@ -66,12 +66,6 @@ class InboxFragment : Fragment() {
             Filter.equalTo("toUser.uid", auth.currentUser?.uid)
         ))
 
-        query.get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    Log.d("InboxFragment", "${document.id} => ${document.data}")
-                }
-            }
 
         val options = FirestoreRecyclerOptions.Builder<Room>()
             .setQuery(query, Room::class.java).build()
