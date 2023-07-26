@@ -60,9 +60,10 @@ class InboxFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         val query = firestoreDb.collection("rooms").where(Filter.or(
-            Filter.equalTo("fromUid", auth.currentUser?.uid),
-            Filter.equalTo("toUid", auth.currentUser?.uid)
+            Filter.equalTo("fromUser.uid", auth.currentUser?.uid),
+            Filter.equalTo("toUser.uid", auth.currentUser?.uid)
         ))
 
         query.get()

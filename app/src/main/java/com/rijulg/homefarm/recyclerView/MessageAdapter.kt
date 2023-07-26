@@ -50,7 +50,7 @@ class MessageAdapter (val context: Context, private val messages: List<Message>)
             val fromMessageText: TextView = itemView.findViewById(R.id.fromMessageText)
             val fromMessageTime: TextView = itemView.findViewById(R.id.fromMessageTime)
 
-            if(message.fromUid == Firebase.auth.currentUser?.uid) {
+            if(message.fromUser?.uid == Firebase.auth.currentUser?.uid) {
 
                 toUser.isGone = true
                 messageTo.isGone = true
@@ -70,24 +70,14 @@ class MessageAdapter (val context: Context, private val messages: List<Message>)
                 fromMessageText.isGone = true
                 fromMessageTime.isGone = true
 
-                val toUid = message.fromUid
+                toMessageTime.text = message.sentAt.toString()
+                toUser.text = message.fromUser?.name
+                toMessageText.text = message.messageText
 
-                FirebaseFirestore.getInstance().collection("users").document(toUid).get()
-                    .addOnSuccessListener { userSnapshot ->
-
-                        val toUserName = userSnapshot.toObject(User::class.java)?.name
-
-                        toUser.text = toUserName
-                        toMessageText.text = message.messageText
-                        toMessageTime.text = message.sentAt.toString()
-
-                        toUser.isVisible = true
-                        messageTo.isVisible = true
-                        toMessageText.isVisible = true
-                        toMessageTime.isVisible = true
-
-
-                    }
+                toUser.isVisible = true
+                messageTo.isVisible = true
+                toMessageText.isVisible = true
+                toMessageTime.isVisible = true
 
             }
 

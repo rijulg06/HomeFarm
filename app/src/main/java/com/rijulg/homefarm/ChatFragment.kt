@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.play.integrity.internal.t
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Filter
@@ -68,49 +69,53 @@ class ChatFragment : Fragment() {
         val args = this.arguments
         val toUser = args?.getSerializable("toUser") as User
         val uid1 = auth.currentUser?.uid as String
-        val uid2 = toUser.uid
-        val roomData = Room(uid1, uid2)
+        firestoreDb.collection("users").document(uid1).get()
+            .addOnSuccessListener { userSnapshot ->
+                val fromUser = userSnapshot.toObject(User::class.java)
+                val roomData = Room(fromUser, toUser)
 
-        val room = firestoreDb.collection("rooms").where(Filter.or(
-            Filter.and(
-                Filter.equalTo("fromUid", uid1),
-                Filter.equalTo("toUid", uid2)
-            ),
-            Filter.and(
-                Filter.equalTo("fromUid", uid2),
-                Filter.equalTo("toUid", uid1)
-            )
-        ))
+                val room = firestoreDb.collection("rooms").where(Filter.or(
+                    Filter.and(
+                        Filter.equalTo("fromUser", fromUser),
+                        Filter.equalTo("toUser", toUser)
+                    ),
+                    Filter.and(
+                        Filter.equalTo("fromUser", toUser),
+                        Filter.equalTo("toUser", fromUser)
+                    )
+                ))
 
-        room.get()
-            .addOnSuccessListener { documents ->
-                if(documents.isEmpty) {
-                    roomId = firestoreDb.collection("rooms").document().id
-                    firestoreDb.collection("rooms").document(roomId).set(roomData)
-                } else {
-                    for(document in documents) {
-                        roomId = document.id
-                    }
-                }
-
-                firestoreDb.collection("rooms")
-                    .document(roomId)
-                    .collection("messages")
-                    .orderBy("sentAt", Query.Direction.DESCENDING)
-                    .addSnapshotListener { snapshot, exception ->
-
-                        if(exception != null || snapshot == null) {
-                            return@addSnapshotListener
+                room.get()
+                    .addOnSuccessListener { documents ->
+                        if(documents.isEmpty) {
+                            roomId = firestoreDb.collection("rooms").document().id
+                            firestoreDb.collection("rooms").document(roomId).set(roomData)
+                        } else {
+                            for(document in documents) {
+                                roomId = document.id
+                            }
                         }
 
-                        val messageList = snapshot.toObjects(Message::class.java)
+                        firestoreDb.collection("rooms")
+                            .document(roomId)
+                            .collection("messages")
+                            .orderBy("sentAt", Query.Direction.DESCENDING)
+                            .addSnapshotListener { snapshot, exception ->
 
-                        val manager = LinearLayoutManager(activity)
-                        manager.reverseLayout = true
-                        recyclerView = view.findViewById(R.id.chatRecyclerView)!!
-                        recyclerView.layoutManager = manager
-                        recyclerView.setHasFixedSize(true)
-                        recyclerView.adapter = activity?.let { MessageAdapter(it, messageList) }
+                                if(exception != null || snapshot == null) {
+                                    return@addSnapshotListener
+                                }
+
+                                val messageList = snapshot.toObjects(Message::class.java)
+
+                                val manager = LinearLayoutManager(activity)
+                                manager.reverseLayout = true
+                                recyclerView = view.findViewById(R.id.chatRecyclerView)!!
+                                recyclerView.layoutManager = manager
+                                recyclerView.setHasFixedSize(true)
+                                recyclerView.adapter = activity?.let { MessageAdapter(it, messageList) }
+
+                            }
 
                     }
 
@@ -132,10 +137,17 @@ class ChatFragment : Fragment() {
 
             val messageText = binding.chatText.text.toString()
             binding.chatText.text.clear()
-            val message = Message(messageText = messageText, fromUid = uid1)
-            firestoreDb.collection("rooms").document(roomId).collection("messages").document().set(message)
-            val roomLastMessage = Room(uid1, uid2, message)
-            firestoreDb.collection("rooms").document(roomId).set(roomLastMessage)
+
+            firestoreDb.collection("users").document(uid1).get()
+                .addOnSuccessListener { userSnapshot ->
+
+                    val fromUser = userSnapshot.toObject(User::class.java)
+                    val message = Message(messageText, fromUser)
+                    firestoreDb.collection("rooms").document(roomId).collection("messages").document().set(message)
+                    val roomLastMessage = Room(fromUser, toUser, message)
+                    firestoreDb.collection("rooms").document(roomId).set(roomLastMessage)
+
+                }
 
         }
 

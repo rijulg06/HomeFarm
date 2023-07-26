@@ -32,21 +32,13 @@ class RecentChatAdapter(options: FirestoreRecyclerOptions<Room>) :
 
     override fun onBindViewHolder(holder: RoomAdapterViewHolder, position: Int, room: Room) {
 
-        if (room.fromUid == Firebase.auth.currentUser?.uid) {
-            FirebaseFirestore.getInstance().collection("users").document(room.toUid).get()
-                .addOnSuccessListener { userSnapshot ->
-                    val lastUser = userSnapshot.toObject(User::class.java)
-                    holder.recentUser.text = lastUser?.name
-                }
-        } else if (room.toUid == Firebase.auth.currentUser?.uid) {
-            FirebaseFirestore.getInstance().collection("users").document(room.fromUid).get()
-                .addOnSuccessListener { userSnapshot ->
-                    val lastUser = userSnapshot.toObject(User::class.java)
-                    holder.recentUser.text = lastUser?.name
-                }
+        if (room.fromUser?.uid == Firebase.auth.currentUser?.uid) {
+            holder.recentUser.text = room.toUser?.name
+        } else if (room.toUser?.uid == Firebase.auth.currentUser?.uid) {
+            holder.recentUser.text = room.fromUser?.name
         }
 
-        if (room.lastMessage?.fromUid == Firebase.auth.currentUser?.uid) {
+        if (room.lastMessage?.fromUser?.uid == Firebase.auth.currentUser?.uid) {
             val recentMessageYou = holder.itemView.context.getString(R.string.recentMessageYou, room.lastMessage?.messageText)
             holder.recentMessage.text = recentMessageYou
         } else {
@@ -57,36 +49,40 @@ class RecentChatAdapter(options: FirestoreRecyclerOptions<Room>) :
 
         holder.itemView.setOnClickListener { v ->
 
-            if (room.fromUid == Firebase.auth.currentUser?.uid) {
-                FirebaseFirestore.getInstance().collection("users").document(room.toUid).get()
-                    .addOnSuccessListener { userSnapshot ->
-                        val toUser = userSnapshot.toObject(User::class.java)
+            if (room.fromUser?.uid == Firebase.auth.currentUser?.uid) {
+                room.toUser?.let {
+                    FirebaseFirestore.getInstance().collection("users").document(it.uid).get()
+                        .addOnSuccessListener { userSnapshot ->
+                            val toUser = userSnapshot.toObject(User::class.java)
 
-                        val bundle = Bundle()
-                        bundle.putSerializable("toUser", toUser)
+                            val bundle = Bundle()
+                            bundle.putSerializable("toUser", toUser)
 
-                        val activity = v!!.context as AppActivity
-                        val chatFragment = ChatFragment()
-                        chatFragment.arguments = bundle
-                        activity.supportFragmentManager.beginTransaction()
-                            .replace(R.id.frame_layout, chatFragment).commit()
+                            val activity = v!!.context as AppActivity
+                            val chatFragment = ChatFragment()
+                            chatFragment.arguments = bundle
+                            activity.supportFragmentManager.beginTransaction()
+                                .replace(R.id.frame_layout, chatFragment).commit()
 
-                    }
-            } else if (room.toUid == Firebase.auth.currentUser?.uid) {
-                FirebaseFirestore.getInstance().collection("users").document(room.fromUid).get()
-                    .addOnSuccessListener { userSnapshot ->
-                        val toUser = userSnapshot.toObject(User::class.java)
+                        }
+                }
+            } else if (room.toUser?.uid == Firebase.auth.currentUser?.uid) {
+                room.fromUser?.let {
+                    FirebaseFirestore.getInstance().collection("users").document(it.uid).get()
+                        .addOnSuccessListener { userSnapshot ->
+                            val toUser = userSnapshot.toObject(User::class.java)
 
-                        val bundle = Bundle()
-                        bundle.putSerializable("toUser", toUser)
+                            val bundle = Bundle()
+                            bundle.putSerializable("toUser", toUser)
 
-                        val activity = v!!.context as AppActivity
-                        val chatFragment = ChatFragment()
-                        chatFragment.arguments = bundle
-                        activity.supportFragmentManager.beginTransaction()
-                            .replace(R.id.frame_layout, chatFragment).commit()
+                            val activity = v!!.context as AppActivity
+                            val chatFragment = ChatFragment()
+                            chatFragment.arguments = bundle
+                            activity.supportFragmentManager.beginTransaction()
+                                .replace(R.id.frame_layout, chatFragment).commit()
 
-                    }
+                        }
+                }
             }
 
         }
