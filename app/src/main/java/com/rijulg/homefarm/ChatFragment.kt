@@ -92,7 +92,7 @@ class ChatFragment : Fragment() {
 
                                 val message = Message(messageText, fromUser, System.currentTimeMillis())
                                 firestoreDb.collection("rooms").document(roomId).collection("messages").document().set(message)
-                                val roomLastMessage = Room(fromUser, toUser, message)
+                                val roomLastMessage = Room(fromUser, toUser, message, false)
                                 firestoreDb.collection("rooms").document(roomId).set(roomLastMessage)
 
                                 return@setOnClickListener
@@ -103,20 +103,23 @@ class ChatFragment : Fragment() {
                             for(document in documents) {
                                 roomId = document.id
                             }
+
+                            binding.sendButton.setOnClickListener {
+
+                                val messageText = binding.chatText.text.toString()
+                                binding.chatText.text.clear()
+
+                                val message = Message(messageText, fromUser, System.currentTimeMillis())
+                                firestoreDb.collection("rooms").document(roomId)
+                                    .collection("messages").document().set(message)
+                                firestoreDb.collection("rooms").document(roomId)
+                                    .update(mapOf(
+                                        "lastMessage" to message,
+                                        "read" to false
+                                    ))
+                            }
+
                         }
-
-                    binding.sendButton.setOnClickListener {
-
-                        val messageText = binding.chatText.text.toString()
-                        binding.chatText.text.clear()
-
-                        val message = Message(messageText, fromUser, System.currentTimeMillis())
-                        firestoreDb.collection("rooms").document(roomId)
-                            .collection("messages").document().set(message)
-                        val roomLastMessage = Room(fromUser, toUser, message)
-                        firestoreDb.collection("rooms").document(roomId)
-                            .set(roomLastMessage)
-                    }
 
                         firestoreDb.collection("rooms")
                             .document(roomId)
