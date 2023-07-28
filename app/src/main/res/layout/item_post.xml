@@ -11,21 +11,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp">
+            android:layout_height="55dp">
 
             <TextView
                 android:id="@+id/tvName"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/oswald_medium"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="24sp"
+                android:layout_marginStart="4dp"
                 tools:text="Vinay Garg" />
 
             <ImageButton
@@ -43,8 +48,10 @@
                 android:id="@+id/tvRelativeTime"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                android:fontFamily="@font/noto_sans"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:textSize="12sp"
                 tools:text="48 minutes ago" />
 
@@ -53,23 +60,25 @@
         <ImageView
             android:id="@+id/ivPost"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="4dp"
+            android:layout_height="225dp"
+            android:layout_marginTop="3dp"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/tvDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            tools:text="Super cool description." />
 
         <TextView
             android:id="@+id/tvFruit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fruit"/>
+            android:fontFamily="@font/noto_sans"
+            android:layout_marginTop="8dp"
+            android:text="@string/fruit" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans"
+            tools:text="Super cool description." />
 
     </LinearLayout>
 

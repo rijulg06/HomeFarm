@@ -22,17 +22,18 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="150dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/signInText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:orientation="vertical">
+        app:layout_constraintTop_toBottomOf="@+id/appName">
 
         <TextView
             android:id="@+id/registerHere"
-            android:layout_gravity="center"
             android:layout_width="312dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="32dp"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -46,13 +47,13 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="312dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
             android:hint="@string/email"
             app:boxStrokeColor="@color/light_green"
             app:counterTextColor="@color/light_green"
             app:errorEnabled="true"
-            android:layout_marginTop="12dp"
-            app:startIconDrawable="@drawable/mail"
-            android:layout_gravity="center">
+            app:startIconDrawable="@drawable/mail">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/registerEmail"
@@ -70,16 +71,16 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="312dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="10dp"
             android:hint="@string/password"
-            android:layout_gravity="center"
             android:singleLine="true"
             app:boxStrokeColor="@color/light_green"
             app:endIconMode="password_toggle"
+            app:errorEnabled="true"
             app:startIconCheckable="true"
-            app:startIconDrawable="@drawable/lock"
-            app:errorEnabled="true">
+            app:startIconDrawable="@drawable/lock">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/registerPassword"
@@ -97,16 +98,16 @@
             android:layout_width="335dp"
             android:layout_height="wrap_content"
             android:indeterminate="true"
-            android:paddingBottom="10dp"/>
+            android:paddingBottom="10dp" />
 
         <Button
             android:id="@+id/doneRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/noto_sans"
             android:text="@string/register"
-            android:layout_marginTop="16dp"
-            android:layout_gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/registerPasswordText"

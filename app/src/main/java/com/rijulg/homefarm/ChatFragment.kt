@@ -1,6 +1,7 @@
 package com.rijulg.homefarm
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.rijulg.homefarm.databinding.FragmentChatBinding
@@ -34,6 +36,8 @@ class ChatFragment : Fragment() {
     private lateinit var roomId: String
 
     private lateinit var recyclerView: RecyclerView
+
+    private lateinit var messageListener: ListenerRegistration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,7 +96,7 @@ class ChatFragment : Fragment() {
 
                                 val message = Message(messageText, fromUser, System.currentTimeMillis())
                                 firestoreDb.collection("rooms").document(roomId).collection("messages").document().set(message)
-                                val roomLastMessage = Room(fromUser, toUser, message, false)
+                                val roomLastMessage = Room(fromUser, toUser, message)
                                 firestoreDb.collection("rooms").document(roomId).set(roomLastMessage)
 
                                 return@setOnClickListener
@@ -113,25 +117,47 @@ class ChatFragment : Fragment() {
                                 firestoreDb.collection("rooms").document(roomId)
                                     .collection("messages").document().set(message)
                                 firestoreDb.collection("rooms").document(roomId)
-                                    .update(mapOf(
-                                        "lastMessage" to message,
-                                        "read" to false
-                                    ))
+                                    .update("lastMessage", message)
                             }
 
                         }
 
-                        firestoreDb.collection("rooms")
+                        val messageQuery = firestoreDb.collection("rooms")
                             .document(roomId)
                             .collection("messages")
                             .orderBy("sentAt", Query.Direction.DESCENDING)
-                            .addSnapshotListener { snapshot, exception ->
+
+                             messageListener = messageQuery.addSnapshotListener { snapshot, exception ->
 
                                 if(exception != null || snapshot == null) {
                                     return@addSnapshotListener
                                 }
 
+
                                 val messageList = snapshot.toObjects(Message::class.java)
+
+                                 // TODO: only get appropriate messages
+                                for(document in snapshot) {
+                                    val messageId = document.id
+                                    firestoreDb.collection("rooms")
+                                        .document(roomId)
+                                        .collection("messages")
+                                        .document(messageId)
+                                        .get()
+                                        .addOnSuccessListener { messageSnap ->
+                                            val messageSnapshot = messageSnap.toObject(Message::class.java)
+
+                                            if(messageSnapshot?.fromUser?.uid != auth.currentUser?.uid){
+
+                                                firestoreDb.collection("rooms")
+                                                    .document(roomId)
+                                                    .collection("messages")
+                                                    .document(messageId)
+                                                    .update("seen", true)
+
+                                            }
+                                        }
+                                }
 
                                 val manager = LinearLayoutManager(activity)
                                 manager.reverseLayout = true
@@ -146,6 +172,11 @@ class ChatFragment : Fragment() {
 
             }
 
+    }
+
+    override fun onStop() {
+        super.onStop()
+        messageListener.remove()
     }
 
     override fun onDestroyView() {

@@ -6,5 +6,6 @@ import java.util.*
 data class Message(
     var messageText: String = "",
     val fromUser: User? = null,
-    var sentAt: Long = 0
+    var sentAt: Long = 0,
+    var seen: Boolean = false
 )
