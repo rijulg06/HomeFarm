@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".AccountFragment">
 
-    <Button
-        android:id="@+id/logout"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/logout"
-        android:textSize="25sp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="@string/account"
+        android:textColor="@color/dark_gray"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp" />
 
-</FrameLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/logout"
+        android:fontFamily="@font/noto_sans_bold"
+        android:textAllCaps="false"
+        android:layout_marginHorizontal="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_gray"
+        android:backgroundTint="@color/gray"
+        android:text="@string/logout"
+        app:cornerRadius="15dp"
+        android:textSize="18sp" />
+
+</LinearLayout>
