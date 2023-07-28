@@ -1,76 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
     tools:context=".PostFragment">
 
-    <Button
-        android:id="@+id/pickImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="8dp"
-        android:text="@string/chooseImage" />
-
-    <ImageView
-        android:id="@+id/imagePreview"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:scaleType="centerCrop"
-        tools:src="@tools:sample/avatars"
-        android:focusableInTouchMode="true"
-        android:focusable="true"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        tools:context=".PostFragment">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/descriptionInputText"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:hint="@string/descriptionInput"
-        app:boxStrokeColor="@color/light_green"
-        app:startIconDrawable="@drawable/description"
-        app:startIconCheckable="true"
-        app:errorEnabled="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/post_an_item"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/noto_sans_bold"
+            android:textColor="@color/dark_gray"
+            android:textSize="18sp"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/descriptionInput"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pickImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/noto_sans"
-            android:minHeight="48dp"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/white"
+            android:text="@string/chooseImage"
+            android:textAllCaps="false"
+            android:textColor="@color/light_green"
+            app:cornerRadius="15dp"
+            app:strokeColor="@color/light_green"
+            app:icon="@drawable/choose_image"
+            app:iconTint="@color/light_green"
+            app:iconGravity="textStart"
+            app:strokeWidth="2dp" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/fruitInputText"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:hint="@string/postFruit"
-        app:boxStrokeColor="@color/light_green"
-        app:startIconDrawable="@drawable/fruit"
-        app:startIconCheckable="true"
-        app:errorEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fruitInput"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/takePhoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/noto_sans"
-            android:minHeight="48dp"/>
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/white"
+            android:textAllCaps="false"
+            app:cornerRadius="15dp"
+            android:textColor="@color/light_green"
+            app:strokeWidth="2dp"
+            app:strokeColor="@color/light_green"
+            android:layout_marginBottom="8dp"
+            app:icon="@drawable/camera"
+            app:iconTint="@color/light_green"
+            app:iconGravity="textStart"
+            android:text="@string/take_photo"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imagePreview"
+            android:layout_width="match_parent"
+            android:layout_height="225dp"
+            android:scaleType="centerCrop"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small"
+            tools:src="@tools:sample/avatars"
+            android:visibility="gone"
+            android:focusableInTouchMode="true"
+            android:focusable="true"/>
 
-    <Button
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fruit_vegetable"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/noto_sans_bold"
+            android:textColor="@color/dark_gray"
+            android:textSize="12sp"
+            android:gravity="center"
+            app:drawableStartCompat="@drawable/fruit"
+            app:drawableTint="@color/light_green" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fruitInputText"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:boxStrokeColor="@color/light_green"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fruitInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans"
+                android:minHeight="48dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/descriptionInput"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/noto_sans_bold"
+            android:textColor="@color/dark_gray"
+            android:textSize="12sp"
+            android:layout_marginStart="4dp"
+            android:gravity="center"
+            android:drawablePadding="4dp"
+            app:drawableStartCompat="@drawable/description"
+            app:drawableTint="@color/light_green" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/descriptionInputText"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/light_green"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/descriptionInput"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:fontFamily="@font/noto_sans"
+                android:gravity="top"
+                android:minHeight="48dp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/post" />
+        android:text="@string/post"
+        app:cornerRadius="15dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

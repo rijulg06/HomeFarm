@@ -2,6 +2,7 @@ package com.rijulg.homefarm
 
 import android.app.Activity
 import android.content.Intent
+import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -12,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -91,6 +93,7 @@ class PostFragment : Fragment() {
                 if (it.resultCode == Activity.RESULT_OK) {
                     val data = it.data
                     imgUri = data?.data
+                    binding.imagePreview.isVisible = true
                     binding.imagePreview.setImageURI(imgUri)
                 } else {
                     Toast.makeText(requireActivity(), "No image selected", Toast.LENGTH_SHORT).show()

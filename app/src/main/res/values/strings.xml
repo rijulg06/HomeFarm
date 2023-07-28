@@ -25,9 +25,9 @@
     <string name="finishAccount">Finish setting up your account. Enter your first name and last initial.</string>
     <string name="next">Next</string>
     <string name="fruit">Fruit</string>
-    <string name="descriptionInput">Post description</string>
+    <string name="descriptionInput">Description</string>
     <string name="postFruit">Post fruit</string>
-    <string name="chooseImage">Choose Image</string>
+    <string name="chooseImage">Choose image</string>
     <string name="signInHere"><u>Sign in here.</u></string>
     <string name="backLogin">Back to login page</string>
     <string name="chatText">Type a message</string>
@@ -35,4 +35,7 @@
     <string name="messageText">Text message</string>
     <string name="toName">Rijul Garg</string>
     <string name="recentMessageYou">"You: %1$s"</string>
+    <string name="post_an_item">Post Fruit/Vegetable</string>
+    <string name="take_photo">Take photo</string>
+    <string name="fruit_vegetable">Fruit/vegetable</string>
 </resources>

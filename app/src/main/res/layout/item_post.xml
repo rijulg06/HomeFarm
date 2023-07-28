@@ -39,7 +39,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_width="85dp"
+                android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:backgroundTint="@color/light_green"
                 app:tint="@color/white" />
@@ -57,12 +57,13 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivPost"
             android:layout_width="match_parent"
             android:layout_height="225dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="6dp"
             android:scaleType="centerCrop"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
@@ -71,6 +72,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans"
             android:layout_marginTop="8dp"
+            android:textColor="@color/black"
             android:text="@string/fruit" />
 
         <TextView
@@ -78,6 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans"
+            android:textColor="@color/black"
             tools:text="Super cool description." />
 
     </LinearLayout>
